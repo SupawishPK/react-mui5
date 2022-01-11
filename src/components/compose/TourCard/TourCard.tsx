@@ -30,20 +30,27 @@ const theme = createTheme({
     },
   },
 });
+interface TourCardPorps {
+  tour: {
+    id: number;
+    name: string;
+    duration: number;
+    rating: number;
+    numberOfReviews: number;
+    price: number;
+    image: string;
+  };
+}
 
-const TourCard = () => {
+const TourCard: React.FC<TourCardPorps> = ({ tour }) => {
   return (
     <Grid item xs={3}>
       <ThemeProvider theme={theme}>
         <Paper elevation={3}>
-          <img
-            src="http://pix4.agoda.net/hotelimages/301315/-1/f37a109db517a20aacc78177b0c9687e.jpg"
-            alt=""
-            className="img"
-          />
+          <img src={tour.image} alt="" className="img" />
           <Box paddingX={1}>
             <Typography variant="subtitle1" component="h2">
-              Immerse into the Falls
+              {tour.name}
             </Typography>
             <Box
               sx={{
@@ -53,7 +60,7 @@ const TourCard = () => {
             >
               <AccessTime sx={{ width: 12.5 }} />
               <Typography variant="body2" component="p" marginLeft={0.5}>
-                5 hours
+                {tour.duration} hours
               </Typography>
             </Box>
             <Box
@@ -65,21 +72,21 @@ const TourCard = () => {
             >
               <Rating
                 name="read-only"
-                value={4.5}
+                value={tour.rating}
                 readOnly
                 precision={0.5}
                 size="small"
               />
               <Typography variant="body2" component="p" marginLeft={0.5}>
-                4.5
+                {tour.rating}
               </Typography>
               <Typography variant="caption" component="p" marginLeft={1.5}>
-                (655 review)
+                ({tour.numberOfReviews} review)
               </Typography>
             </Box>
             <Box>
               <Typography variant="h6" component="h3">
-                From C $147
+                From C ${tour.price}
               </Typography>
             </Box>
           </Box>
